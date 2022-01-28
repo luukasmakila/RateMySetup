@@ -15,10 +15,11 @@ a {
 nav {
   display: flex;
   justify-content: flex-end;
-  min-height: 6vh;
+  min-height: 4vh;
   position: absolute;
   width: 100%;
   align-items: center;
+  background-color: #2c2c2c;
 }
 
 .navlinks {
@@ -26,7 +27,7 @@ nav {
   list-style: none;
   justify-content: space-around;
   width: 30%;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .link {
@@ -49,6 +50,28 @@ nav {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.login-form {
+  max-width: 800px;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  color: #2c2c2c;
+}
+
+.signup-form {
+  max-width: 800px;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  color: #2c2c2c;
 }
 
 .footer {
@@ -176,10 +199,10 @@ nav {
     right: 0px;
     display: flex;
     flex-direction: column;
-    height: 94vh;
+    height: 96vh;
     align-items: center;
     width: 100%;
-    top: 6vh;
+    top: 4vh;
     background-color: #2c2c2c;
     font-size: 32px;
     transform: translateX(100%);
