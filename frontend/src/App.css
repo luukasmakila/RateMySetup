@@ -1,0 +1,154 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  justify-content: flex-end;
+  min-height: 6vh;
+  position: absolute;
+  width: 100%;
+  align-items: center;
+  background-color: #2c2c2c;
+}
+
+.navlinks {
+  display: flex;
+  list-style: none;
+  justify-content: space-around;
+  width: 30%;
+  font-size: 24px;
+}
+
+.link {
+  letter-spacing: 3px;
+  font-weight: bold;
+}
+
+.link a {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.link a:hover {
+  color: white;
+}
+
+.main {
+  background: radial-gradient(at center center, #0c414e70 0%, #0b2d4d7c 100%),
+    url("./setup1.jpg");
+  height: 70vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.showcase {
+  max-width: 800px;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.showcase h1 {
+  font-size: 64px;
+  color: white;
+  font-weight: normal;
+  letter-spacing: 3px;
+}
+
+.showcase h2 {
+  font-size: 28px;
+  color: white;
+  font-weight: lighter;
+  letter-spacing: 3px;
+}
+
+.showcase p {
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  font-weight: lighter;
+  letter-spacing: 2px;
+}
+
+.showcase__buttons-posts {
+  cursor: pointer;
+  border: white solid 1px;
+  background-color: transparent;
+  color: white;
+  padding: 10px 50px;
+  margin: 0 10px;
+}
+
+.showcase__buttons-posts:hover {
+  border: #2c2c2c solid 1px;
+  background-color: #2c2c2c;
+  color: white;
+}
+
+.showcase__buttons-create {
+  cursor: pointer;
+  border: #2c2c2c solid 1px;
+  background-color: #2c2c2c;
+  color: white;
+  padding: 10px 50px;
+  margin: 0 10px;
+}
+
+.showcase__buttons-create:hover {
+  border: white solid 1px;
+  background-color: transparent;
+  color: white;
+}
+
+.hamburger-toggle {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.9);
+  display: none;
+  padding: 10px;
+}
+
+.hamburger-toggle:hover {
+  color: white;
+}
+
+@media screen and (max-width: 919px) {
+  body {
+    overflow-x: hidden;
+  }
+  .hamburger-toggle {
+    display: block;
+  }
+  .navlinks {
+    position: absolute;
+    right: 0px;
+    display: flex;
+    flex-direction: column;
+    height: 94vh;
+    align-items: center;
+    width: 100%;
+    top: 6vh;
+    background-color: #2c2c2c;
+    font-size: 32px;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in;
+  }
+  .active {
+    transform: translateX(0%);
+  }
+}

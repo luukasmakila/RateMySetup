@@ -9,7 +9,9 @@ const App = () => {
   return (
     <div>
       <Header/>
-      <Imgbody/>
+      <div className='main'>
+        <Imgbody/>
+      </div>
       {/* Routes here */}
       <Login/>
       <SignUp/>
