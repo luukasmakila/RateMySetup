@@ -13,8 +13,6 @@ const App = () => {
         <Imgbody/>
       </div>
       {/* Routes here */}
-      <Login/>
-      <SignUp/>
       <Footer/>
     </div>
   )

@@ -19,7 +19,6 @@ nav {
   position: absolute;
   width: 100%;
   align-items: center;
-  background-color: #2c2c2c;
 }
 
 .navlinks {
@@ -52,6 +51,47 @@ nav {
   background-position: center;
 }
 
+.footer {
+  max-width: 800px;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.footer h2 {
+  font-size: 50px;
+  color: #2c2c2c;
+  font-weight: normal;
+  letter-spacing: 3px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.footer__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.footer__button {
+  cursor: pointer;
+  border: #2c2c2c solid 1px;
+  background-color: #2c2c2c;
+  color: white;
+  padding: 10px 50px;
+  margin: 0 10px;
+}
+
+.footer__button:hover {
+  border: #ffb6c1 solid 1px;
+  background-color: #ffb6c1;
+  color: #2c2c2c;
+}
+
 .showcase {
   max-width: 800px;
   height: 70vh;
@@ -63,16 +103,9 @@ nav {
 }
 
 .showcase h1 {
-  font-size: 64px;
+  font-size: 50px;
   color: white;
   font-weight: normal;
-  letter-spacing: 3px;
-}
-
-.showcase h2 {
-  font-size: 28px;
-  color: white;
-  font-weight: lighter;
   letter-spacing: 3px;
 }
 
@@ -130,6 +163,9 @@ nav {
 @media screen and (max-width: 919px) {
   body {
     overflow-x: hidden;
+  }
+  nav {
+    background-color: #2c2c2c;
   }
   .hamburger-toggle {
     display: block;
