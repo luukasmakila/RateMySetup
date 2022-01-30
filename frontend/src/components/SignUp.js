@@ -1,16 +1,22 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router'
 
 const SignUp = () => {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [confirmEmail, setConfirmEmail] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
+  const handleSubmit = () => {
+    navigate('/')
+  }
+
   return (
     <div>
       <div className='signup-form'>
         <h2>This is the sign up form</h2>
-        <form className='signup__form'>
+        <form className='signup__form' onSubmit={handleSubmit}>
           <label>Email</label>
           <input
             type='email'
