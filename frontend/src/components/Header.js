@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const Header = () => {
   const [active, setActive] = useState(false)
-  console.log(active)
+
   const renderClasses = () => {
     let classes = 'navlinks'
     if(active){
