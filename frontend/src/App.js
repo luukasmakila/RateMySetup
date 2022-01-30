@@ -8,8 +8,8 @@ import SignUp from './components/SignUp'
 const App = () => {
   return (
     <div>
-      <Header/>
       <Router>
+      <Header/>
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/login' element={<Login/>}/>
