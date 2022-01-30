@@ -13,8 +13,8 @@ const Login = () => {
   return (
     <div>
       <div className='login-form'>
-        <h2>This is the login form</h2>
-        <form className='login-form' onSubmit={handleLogin}>
+        <h2>Login</h2>
+        <form className='login__form' onSubmit={handleLogin}>
           <label>Email</label>
           <input 
             type='email'
@@ -33,7 +33,7 @@ const Login = () => {
             onChange={(event) => setPassword(event.target.value)}
             tabIndex={2}
           />
-          <button type='submit'>Login</button>
+          <button type='submit' className='login-button'>Login</button>
         </form>
       </div>
     </div>
