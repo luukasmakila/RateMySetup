@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
+import axios from 'axios'
 
 const SignUp = () => {
   const navigate = useNavigate()
@@ -8,7 +9,19 @@ const SignUp = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    if (email !== confirmEmail){
+      return
+    }
+    const newUser = {
+      email,
+      username,
+      password
+    }
+
+    const result = await axios.post('http://localhost:3001/api/auth/sign-up', newUser)
+    console.log(result)
     navigate('/')
   }
 
@@ -30,7 +43,7 @@ const SignUp = () => {
           <input
             type='email'
             required
-            id='email'
+            id='email2'
             placeholder='Confirm your email'
             onChange={(event) => setConfirmEmail(event.target.value)}
             tabIndex={2}
