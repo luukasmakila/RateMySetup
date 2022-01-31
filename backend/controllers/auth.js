@@ -23,8 +23,28 @@ const sign_up = async (request, response, next) => {
 }
 
 const login = async (request, response, next) => {
-  console.log(request.body)
-  return response.status(201).json({success: true})
+  const { email, password } = request.body
+
+  if(!email || !password){
+    response.status(400).json({success: false, error: "Email and password required."})
+  }
+
+  try {
+    const user = await User.findOne({ email })
+    if(!user){
+      console.log('email does not match any users')
+      return response.status(404).json({success: false, error: 'Invalid credentials'})
+    }
+    const passwordsMatching = await bcrypt.compare(password, user.password)
+    console.log(passwordsMatching)
+    if(!passwordsMatching){
+      return response.status(404).json({success: false, error: 'Invalid password'})
+    }
+    response.status(201).json({success: false, message: 'Login successful'})
+  } catch (error) {
+    console.log(error)
+    response.status(500).json({success: false, error: error.message})
+  }
 }
 
 module.exports = {
