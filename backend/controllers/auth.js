@@ -5,7 +5,8 @@ const sign_up = async (request, response, next) => {
 }
 
 const login = async (request, response, next) => {
-  console.log('login')
+  console.log(request.body)
+  return response.status(201).json({success: true})
 }
 
 module.exports = {
