@@ -21,7 +21,8 @@ const SignUp = () => {
     }
 
     const result = await axios.post('http://localhost:3001/api/auth/sign-up', newUser)
-    console.log(result.data.token)
+    const token = result.data.token
+    localStorage.setItem('authToken', token)
     navigate('/')
   }
 
