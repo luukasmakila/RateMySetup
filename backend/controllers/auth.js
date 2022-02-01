@@ -1,13 +1,16 @@
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
+const JWT = require('jsonwebtoken')
+require('dotenv').config()
 
 const sign_up = async (request, response, next) => {
   const body = request.body
 
-  //HASH PASSWORDS HERE
+  //hash password
   const saltRounds = 10
   const passwordHash = await bcrypt.hash(body.password, saltRounds)
 
+  //creates a User model like object
   const user = new User({
     email: body.email,
     username: body.username,
@@ -15,8 +18,10 @@ const sign_up = async (request, response, next) => {
   })
 
   try {
+    //saves user
     await user.save()
-    response.status(201).json({success: true})
+    const token = getToken(user)
+    response.status(201).json({success: true, message: 'Signed up!', token})
   } catch (error) {
     response.status(500).json({success: false, error: error.message})
   }
@@ -30,21 +35,33 @@ const login = async (request, response, next) => {
   }
 
   try {
+    //email must be unique so "findOne" works well
     const user = await User.findOne({ email })
     if(!user){
       console.log('email does not match any users')
       return response.status(404).json({success: false, error: 'Invalid credentials'})
     }
+
+    //check if password is correct
     const passwordsMatching = await bcrypt.compare(password, user.password)
-    console.log(passwordsMatching)
+    
     if(!passwordsMatching){
       return response.status(404).json({success: false, error: 'Invalid password'})
     }
-    response.status(201).json({success: false, message: 'Login successful'})
+    
+    //get the token after succesfull login
+    const token = getToken(user)
+
+    response.status(201).json({success: true, message: 'Login successful', token})
+
   } catch (error) {
-    console.log(error)
     response.status(500).json({success: false, error: error.message})
   }
+}
+
+//signs token and sends it back
+const getToken = (user) => {
+  return JWT.sign({id: user.__id}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES})
 }
 
 module.exports = {

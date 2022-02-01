@@ -13,9 +13,16 @@ const Login = () => {
       email,
       password
     }
-    const result = await axios.post('http://localhost:3001/api/auth/login', user)
-    console.log(result)
-    navigate('/')
+    
+    try {
+      const result = await axios.post('http://localhost:3001/api/auth/login', user)
+      console.log(result.data.token)
+      const token = result.data.token
+      localStorage.setItem('authToken', token)
+      navigate('/')
+    } catch (error) {
+      console.log(error.message)
+    }
   }
 
   return (
