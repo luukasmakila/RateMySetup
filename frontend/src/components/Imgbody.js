@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Imgbody = () => {
   return (
@@ -7,7 +8,7 @@ const Imgbody = () => {
       <p>Find inspiration from other's setups or inspire other's by creating a post of your own!</p>
       <div className='showcase__buttons'>
         <button className='showcase__buttons-posts'>Review other's!</button>
-        <button className='showcase__buttons-create'>Create post!</button>
+        <Link to='/create-post'><button className='showcase__buttons-create'>Create post!</button></Link>
       </div>
     </div>
   )
