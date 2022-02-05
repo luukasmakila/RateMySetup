@@ -63,6 +63,19 @@ nav {
   color: #2c2c2c;
 }
 
+.setup-info h2 {
+  margin-bottom: 20px;
+}
+
+.setup-info button {
+  margin-top: 20px;
+}
+
+.create-post-image {
+  display: flex;
+  justify-content: center;
+}
+
 .login-form {
   max-width: 800px;
   height: 50vh;
