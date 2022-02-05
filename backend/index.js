@@ -2,6 +2,7 @@ const express = require('express')
 require('dotenv').config()
 const mongoose = require('mongoose')
 const authRouter = require('./routes/auth')
+const privateRouter = require('./controllers/private')
 const cors = require('cors')
 
 //APP CONFIG
@@ -25,6 +26,7 @@ mongoose.connect(MONGO_URI)
 
 //API ENDPOINTS
 app.use('/api/auth', authRouter)
+app.use('/api/private', privateRouter)
 
 //LISTENER
 app.listen(PORT, () => {

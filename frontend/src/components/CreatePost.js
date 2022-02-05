@@ -19,7 +19,7 @@ const CreatePost = () => {
     formData.append('setupImage', image)
 
     try {
-      const result = await axios.post('http://localhost:3001/api/private/posts', formData)
+      const result = await axios.post('http://localhost:3001/api/private/create-post', formData)
       console.log(result)
     } catch (error) {
       console.log(error)
