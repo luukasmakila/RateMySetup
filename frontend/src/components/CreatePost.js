@@ -1,30 +1,41 @@
-import React, { useState } from 'react';
-import FileBase64 from 'react-file-base64'
+import React, { useState } from 'react'
+import axios from 'axios'
 
 const CreatePost = () => {
   const [bio, setBio] = useState('')
   const [image, setImage] = useState('')
 
-  const handleSubmit = () => {
-    console.log(image)
+  const handleChange = (event) => {
+    setImage(event.target.files[0])
+    console.log(event.target.files[0])
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    const formData = new FormData()
+
+    formData.append('bio', bio)
+    formData.append('setupImage', image)
+
+    try {
+      const result = await axios.post('http://localhost:3001/api/private/posts', formData)
+      console.log(result)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
     <div>
-      <form className='setup-info' onSubmit={handleSubmit}>
+      <form className='setup-info' onSubmit={handleSubmit} encType='multipart/form-data'>
         <h2>Setup info</h2>
         <label>Setup parts</label>
         <input type='text' value={bio} onChange={(e) => setBio(e.target.value)}/>
         <label>Setup picture</label>
-        <FileBase64
-          multiple={ false }
-          onDone={({base64}) => setImage(base64) }
-        />
+        <input type='file' filename='setupImage' onChange={handleChange}/>
         <button type='submit'>Submit</button>
       </form>
-      <div className='create-post-image'>
-        <img style={{ width: 600, height: 300 }} src={image}/>
-      </div>
     </div>
   )
 }
