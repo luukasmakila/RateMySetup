@@ -6,6 +6,7 @@ import Login from './components/Login'
 import SignUp from './components/SignUp'
 import CreatePost from './components/CreatePost'
 import ProtectedRoutes from './components/ProtectedRoutes'
+import ViewPosts from './components/ViewPosts'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path='/sign-up' element={<SignUp/>}/>
           <Route element={<ProtectedRoutes/>}>
             <Route path='/create-post' element={<CreatePost/>}/>
+            <Route path='/posts' element={<ViewPosts/>}/>
           </Route>
         </Routes>
       </Router>

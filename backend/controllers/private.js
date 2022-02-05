@@ -12,11 +12,11 @@ const storage = multer.diskStorage({
   }
 })
 
+//upload image to uploads folder
 const upload = multer({storage: storage})
 
+//create a new post
 privateRouter.post('/create-post', upload.single('setupImage'), async (request, response, next) => {
-  
-  console.log(request.body)
   const newPost = new Post({
     bio: request.body.bio,
     setupImage: request.file.originalname
@@ -28,7 +28,12 @@ privateRouter.post('/create-post', upload.single('setupImage'), async (request, 
   } catch (error) {
     console.log(error)
   }
+})
 
+//get all posts
+privateRouter.get('/posts', async (request, response, next) => {
+  const posts = await Post.find({})
+  response.json(posts.map(post => post.toJSON()))
 })
 
 module.exports = privateRouter
