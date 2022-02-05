@@ -1,4 +1,5 @@
 const Post = require('../models/post')
+const User = require('../models/user')
 const express = require('express')
 const privateRouter = express.Router()
 const multer = require('multer')
@@ -16,17 +17,23 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage})
 
 //create a new post
+//because we are using multer the routes have to be defined here...
 privateRouter.post('/create-post', upload.single('setupImage'), async (request, response, next) => {
+  const user = await User.findById(request.headers.authorization)
+
   const newPost = new Post({
     bio: request.body.bio,
-    setupImage: request.file.originalname
+    setupImage: request.file.originalname,
+    user: user._id
   })
 
   try {
-    const result = await newPost.save()
-    console.log(result)
+    const post = await newPost.save()
+    user.posts = user.posts.concat(post)
+    await user.save()
+    response.status(201).json({success: true, message: 'post created!'})
   } catch (error) {
-    console.log(error)
+    response.status(400).json({success: false, message: 'failed to create the post.'})
   }
 })
 

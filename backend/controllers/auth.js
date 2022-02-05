@@ -19,9 +19,10 @@ const sign_up = async (request, response, next) => {
 
   try {
     //saves user
-    await user.save()
-    const token = getToken(user)
-    response.status(201).json({success: true, message: 'Signed up!', token})
+    const savedUser = await user.save()
+    const token = getToken(savedUser)
+    const id = savedUser._id
+    response.status(201).json({success: true, message: 'Signed up!', token, id})
   } catch (error) {
     response.status(500).json({success: false, error: error.message})
   }
@@ -51,8 +52,9 @@ const login = async (request, response, next) => {
     
     //get the token after succesfull login
     const token = getToken(user)
+    const id = user._id
 
-    response.status(201).json({success: true, message: 'Login successful', token})
+    response.status(201).json({success: true, message: 'Login successful', token, id})
 
   } catch (error) {
     response.status(500).json({success: false, error: error.message})

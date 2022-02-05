@@ -19,7 +19,8 @@ const CreatePost = () => {
     formData.append('setupImage', image)
 
     try {
-      const result = await axios.post('http://localhost:3001/api/private/create-post', formData)
+      const userId = localStorage.getItem('userId')
+      const result = await axios.post('http://localhost:3001/api/private/create-post', formData, {headers: {'authorization': userId}})
       console.log(result)
     } catch (error) {
       console.log(error)
