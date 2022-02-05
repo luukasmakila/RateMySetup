@@ -1,7 +1,6 @@
 import React from 'react'
 import Imgbody from './Imgbody'
 import Footer from './Footer'
-import Logout from './Logout'
 
 const Home = () => {
   return (
@@ -10,7 +9,6 @@ const Home = () => {
           <Imgbody/>
       </div>
       <Footer/>
-      <Logout/>
     </div>
   )
 }
