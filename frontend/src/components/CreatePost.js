@@ -23,7 +23,7 @@ const CreatePost = () => {
       const result = await axios.post('http://localhost:3001/api/private/create-post', formData, {headers: {'authorization': userId}})
       console.log(result)
     } catch (error) {
-      console.log(error)
+      console.log(error.message)
     }
   }
 
