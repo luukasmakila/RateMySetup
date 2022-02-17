@@ -11,15 +11,19 @@ const ViewPosts = () => {
     }
     fetchData()
   }, [])
-
+  //<img src={`/uploads/${post.setupImage}`} alt='setupImage' width='800' height='400'/>
   return (
     <div className='view-posts'>
       <h4>Posts by others</h4>
       {posts.map((post, idx) => (
         <div key={idx}>
-          <h1>{post.author}</h1>
-          <p>{post.bio}</p>
-          <img src={`/uploads/${post.setupImage}`} alt='setupImage' width='800' height='400'/>
+          <div className='card'>
+            <div className='card-header'><img src={`/uploads/${post.setupImage}`} alt='setupImage' width='800' height='400'/></div>
+            <div className='card-body'>{post.bio}</div>
+            <div className='card-footer'>
+              <button className='btn'>View Post</button>
+            </div>
+          </div>
         </div>
       ))}
     </div>
