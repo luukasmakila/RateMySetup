@@ -52,17 +52,6 @@ nav {
   background-position: center;
 }
 
-.view-posts {
-  max-width: 800px;
-  height: 50vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  color: #2c2c2c;
-}
-
 .setup-info {
   max-width: 800px;
   height: 50vh;
@@ -238,6 +227,17 @@ nav {
 
 .hamburger-toggle:hover {
   color: white;
+}
+
+.view-posts {
+  max-width: 800px;
+  padding-top: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  color: #2c2c2c;
 }
 
 .card {

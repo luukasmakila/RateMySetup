@@ -24,6 +24,7 @@ const ViewPosts = () => {
               <button className='btn'>View Post</button>
             </div>
           </div>
+          <br></br>
         </div>
       ))}
     </div>
