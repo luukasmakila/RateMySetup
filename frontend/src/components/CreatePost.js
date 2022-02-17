@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router'
 import axios from 'axios'
 
 const CreatePost = () => {
+  const navigate = useNavigate()
   const [bio, setBio] = useState('')
   const [image, setImage] = useState('')
 
@@ -20,8 +22,9 @@ const CreatePost = () => {
 
     try {
       const userId = localStorage.getItem('userId')
-      const result = await axios.post('http://localhost:3001/api/private/create-post', formData, {headers: {'authorization': userId}})
-      console.log(result)
+      await axios.post('http://localhost:3001/api/private/create-post', formData, {headers: {'authorization': userId}})
+      navigate('/')
+      
     } catch (error) {
       console.log(error.message)
     }
@@ -31,7 +34,7 @@ const CreatePost = () => {
     <div>
       <form className='setup-info' onSubmit={handleSubmit} encType='multipart/form-data'>
         <h2>Setup info</h2>
-        <label>Setup parts</label>
+        <label>Setup bio</label>
         <input type='text' value={bio} onChange={(e) => setBio(e.target.value)}/>
         <label>Setup picture</label>
         <input type='file' filename='setupImage' onChange={handleChange}/>

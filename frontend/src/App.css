@@ -244,7 +244,7 @@ nav {
   --padding: 1rem;
   background: white;
   border: none;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 5px 3px 0 rgba(0, 0, 0, 0.2);
   border-radius: 0.25rem;
   overflow: hidden;
 }
@@ -262,6 +262,10 @@ nav {
   aspect-ratio: 16 / 9;
   object-fit: cover;
   object-position: center;
+}
+
+.card:hover > .card-header > img {
+  transform: scale(1.06);
 }
 
 .card-body {
