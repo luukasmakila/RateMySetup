@@ -6,6 +6,7 @@ const CreatePost = () => {
   const navigate = useNavigate()
   const [bio, setBio] = useState('')
   const [image, setImage] = useState('')
+  const [title, setTitle] = useState('')
 
   const handleChange = (event) => {
     setImage(event.target.files[0])
@@ -17,6 +18,7 @@ const CreatePost = () => {
 
     const formData = new FormData()
 
+    formData.append('title', title)
     formData.append('bio', bio)
     formData.append('setupImage', image)
 
@@ -24,7 +26,6 @@ const CreatePost = () => {
       const userId = localStorage.getItem('userId')
       await axios.post('http://localhost:3001/api/private/create-post', formData, {headers: {'authorization': userId}})
       navigate('/')
-      
     } catch (error) {
       console.log(error.message)
     }
@@ -34,6 +35,8 @@ const CreatePost = () => {
     <div>
       <form className='setup-info' onSubmit={handleSubmit} encType='multipart/form-data'>
         <h2>Setup info</h2>
+        <label>Title</label>
+        <input type='text' value={title} onChange={(e) => setTitle(e.target.value)}/>
         <label>Setup bio</label>
         <input type='text' value={bio} onChange={(e) => setBio(e.target.value)}/>
         <label>Setup picture</label>

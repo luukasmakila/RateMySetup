@@ -20,13 +20,13 @@ const upload = multer({storage: storage})
 //because we are using multer the routes have to be defined here...
 privateRouter.post('/create-post', upload.single('setupImage'), async (request, response, next) => {
   const user = await User.findById(request.headers.authorization)
-  console.log(user)
 
   if(!user) return response.status(400).json({success: false, message: 'unauthorized request'})
 
   const newPost = new Post({
     bio: request.body.bio,
     setupImage: request.file.originalname,
+    title: request.body.title,
     author: user.username,
     user: user._id
   })
