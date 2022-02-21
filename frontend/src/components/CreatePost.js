@@ -13,8 +13,7 @@ const CreatePost = () => {
     console.log(event.target.files[0])
   }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault()
+  const postToDb = async () => {
 
     const formData = new FormData()
 
@@ -24,16 +23,22 @@ const CreatePost = () => {
 
     try {
       const userId = localStorage.getItem('userId')
-      await axios.post('http://localhost:3001/api/private/create-post', formData, {headers: {'authorization': userId}})
-      navigate('/')
+      const result = await axios.post('http://localhost:3001/api/private/create-post', formData, {headers: {'authorization': userId}})
+      console.log(result.data)
     } catch (error) {
       console.log(error.message)
     }
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    postToDb()
+    navigate('/')
+  }
+
   return (
     <div>
-      <form className='setup-info' onSubmit={handleSubmit} encType='multipart/form-data'>
+      <form className='setup-info' encType='multipart/form-data'>
         <h2>Setup info</h2>
         <label>Title</label>
         <input type='text' value={title} onChange={(e) => setTitle(e.target.value)}/>
@@ -41,7 +46,7 @@ const CreatePost = () => {
         <input type='text' value={bio} onChange={(e) => setBio(e.target.value)}/>
         <label>Setup picture</label>
         <input type='file' filename='setupImage' onChange={handleChange}/>
-        <button type='submit'>Submit</button>
+        <button type='button' onClick={handleSubmit}>Submit</button>
       </form>
     </div>
   )
