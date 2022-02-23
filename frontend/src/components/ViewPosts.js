@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 const ViewPosts = () => {
@@ -22,7 +23,7 @@ const ViewPosts = () => {
             <div className='card-header'><img src={`/uploads/${post.setupImage}`} alt='setupImage'/></div>
             <div className='card-body'>{post.title}</div>
             <div className='card-footer'>
-              <button className='btn'>View Post</button>
+              <Link to={'/'+ post._id}><button className='btn'>View Post</button></Link>
             </div>
           </div>
           <br></br>
