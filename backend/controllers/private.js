@@ -47,4 +47,11 @@ privateRouter.get('/posts', async (request, response, next) => {
   response.json(posts.map(post => post.toJSON()))
 })
 
+///get a single post
+privateRouter.get('/posts/:id', async (request, response, next) => {
+  const post = await Post.findById(request.params.id)
+  console.log(post)
+  response.json(post.toJSON())
+})
+
 module.exports = privateRouter
