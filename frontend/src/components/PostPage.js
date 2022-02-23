@@ -22,7 +22,7 @@ const PostPage = () => {
       <br/>
       <h4>{postInfo.bio}</h4>
       <br/>
-      <img src={`/uploads/${postInfo.setupImage}`} alt='setupImage'/>
+      <img src={`/uploads/${postInfo.setupImage}`} alt='setupImage' width={400} height={200}/>
     </div>
   )
 }
