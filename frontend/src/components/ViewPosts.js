@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const ViewPosts = () => {
+  const navigate = useNavigate()
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const ViewPosts = () => {
             <div className='card-header'><img src={`/uploads/${post.setupImage}`} alt='setupImage'/></div>
             <div className='card-body'>{post.title}</div>
             <div className='card-footer'>
-              <Link to={'/'+ post._id}><button className='btn'>View Post</button></Link>
+              <button className='btn' onClick={() => navigate('/posts/' + post._id)}>View Post</button>
             </div>
           </div>
           <br></br>

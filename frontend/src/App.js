@@ -7,6 +7,7 @@ import SignUp from './components/SignUp'
 import CreatePost from './components/CreatePost'
 import ProtectedRoutes from './components/ProtectedRoutes'
 import ViewPosts from './components/ViewPosts'
+import PostPage from './components/PostPage'
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route element={<ProtectedRoutes/>}>
             <Route path='/create-post' element={<CreatePost/>}/>
             <Route path='/posts' element={<ViewPosts/>}/>
+            <Route path='/posts/:id' element={<PostPage/>}/>
           </Route>
         </Routes>
       </Router>
