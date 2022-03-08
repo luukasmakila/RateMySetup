@@ -9,3 +9,12 @@ Users can: </br>
    -Create an account and login </br>
 </br>
 Project will be powered by the MERN stack
+<br/>
+<br/>
+![alt text](https://github.com/luukasmakila/RateMySetup/blob/master/Screenshot%20(25).png) <br/>
+<br/>
+![alt_text](https://github.com/luukasmakila/RateMySetup/blob/master/Screenshot%20(28).png) <br/>
+<br/>
+![alt_text](https://github.com/luukasmakila/RateMySetup/blob/master/Screenshot%20(27).png) <br/>
+<br/>
+![alt_text](https://github.com/luukasmakila/RateMySetup/blob/master/Screenshot%20(26).png)
