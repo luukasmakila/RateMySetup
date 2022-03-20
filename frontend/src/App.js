@@ -10,6 +10,7 @@ import ViewPosts from './components/ViewPosts'
 import PostPage from './components/PostPage'
 
 const App = () => {
+
   return (
     <div>
       <Router>

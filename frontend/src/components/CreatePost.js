@@ -8,9 +8,8 @@ const CreatePost = () => {
   const [image, setImage] = useState('')
   const [title, setTitle] = useState('')
 
-  const handleChange = (event) => {
+  const handleInput = (event) => {
     setImage(event.target.files[0])
-    console.log(event.target.files[0])
   }
 
   const postToDb = async () => {
@@ -45,7 +44,7 @@ const CreatePost = () => {
         <label>Setup bio</label>
         <input type='text' value={bio} onChange={(e) => setBio(e.target.value)}/>
         <label>Setup picture</label>
-        <input type='file' filename='setupImage' onChange={handleChange}/>
+        <input type='file' filename='setupImage' onChange={handleInput}/>
         <button type='button' onClick={handleSubmit}>Submit</button>
       </form>
     </div>

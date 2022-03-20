@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Header = () => {
-  const [active, setActive] = useState(false)
+  const [isActive, setActive] = useState(false)
 
   const renderClasses = () => {
     let classes = 'navlinks'
-    if(active){
+    if(isActive){
       classes += ' active'
     }
     return classes
@@ -16,6 +16,8 @@ const Header = () => {
     localStorage.clear()
   }
 
+  console.log('hello')
+
   return (
     <nav>
       <ul className={renderClasses()}>
@@ -24,7 +26,7 @@ const Header = () => {
         <li className='link'><Link to='/sign-up'>Sign Up</Link></li>
         <li className='link'><Link to='/' onClick={logout}>Logout</Link></li>
       </ul>
-      <div onClick={() => setActive(!active)} className='hamburger-toggle'>
+      <div onClick={() => setActive(!isActive)} className='hamburger-toggle'>
         <i className='fas fa-bars fa-lg'/>
       </div>
     </nav>

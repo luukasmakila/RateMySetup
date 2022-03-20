@@ -14,8 +14,6 @@ const PostPage = () => {
     getPost()
   }, [])
 
-  console.log(postInfo)
-
   return (
     <div className='single-post'>
       <h1>This is the single post page for post "{postInfo.title}"</h1>
