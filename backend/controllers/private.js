@@ -28,6 +28,7 @@ privateRouter.post('/create-post', upload.single('setupImage'), async (request, 
     setupImage: request.file.originalname,
     title: request.body.title,
     author: user.username,
+    likes: 0,
     user: user._id
   })
 
@@ -52,6 +53,12 @@ privateRouter.get('/posts/:id', async (request, response, next) => {
   const post = await Post.findById(request.params.id)
   console.log(post)
   response.json(post.toJSON())
+})
+
+//add like / dislike
+privateRouter.put('/posts/:id', async (request, response, next) => {
+  const id = request.params.id
+  console.log(id)
 })
 
 module.exports = privateRouter
