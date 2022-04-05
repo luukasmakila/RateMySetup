@@ -58,7 +58,11 @@ privateRouter.get('/posts/:id', async (request, response, next) => {
 //add like / dislike
 privateRouter.put('/posts/:id', async (request, response, next) => {
   const id = request.params.id
+  const updatedPost = request.body
+  console.log(request.body)
   console.log(id)
+  const result = await Post.findByIdAndUpdate(id, updatedPost)
+  response.status(200).json({success: true, message: 'post liked!'})
 })
 
 module.exports = privateRouter
