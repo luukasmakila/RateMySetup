@@ -15,23 +15,33 @@ const ViewPosts = () => {
     fetchData()
   }, [])
 
-  const handleLike = async (post) => {
-    var likes = post.likes + 1
+  const handleLike = async (likedPost) => {
+    var newLikes = likedPost.likes + 1
     //send put request
     const updatedPost = {
-      ...post,
-      likes: likes
+      ...likedPost,
+      likes: newLikes
     }
-    const token = localStorage.getItem('authToken')
-    const result = await axios.put('http://localhost:3001/api/private/posts/' + post._id, updatedPost, {headers: {'authorization': token}})
-    console.log(result)
-    
+
+    try {
+      const token = localStorage.getItem('authToken')
+      await axios.put('http://localhost:3001/api/private/posts/' + likedPost._id, updatedPost, {headers: {'authorization': token}})
+      const newPosts = posts.map(post => {
+        if(post._id === likedPost._id){
+          return updatedPost
+        }
+        return post
+      })
+      setPosts(newPosts)
+    } catch (error) {
+      console.log(error)
+    }    
   }
 
   const handleDislike = async (post) => {
     console.log('dislike')
     console.log(post._id)
-    var likes = post.likes - 1
+    //var likes = post.likes - 1
   }
   
   return (
@@ -53,7 +63,8 @@ const ViewPosts = () => {
               </IconButton>
               <IconButton onClick={ () => handleDislike(post) }>
                 <ThumbDownOffAltIcon/>
-              </IconButton>              
+              </IconButton>
+              <p>{post.likes}</p>    
             </div>
           </div>
           <br></br>
