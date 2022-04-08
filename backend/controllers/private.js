@@ -30,6 +30,8 @@ privateRouter.post('/create-post', upload.single('setupImage'), async (request, 
     author: user.username,
     likes: 0,
     dislikes: 0,
+    likers: [],
+    dislikers: [],
     user: user._id
   })
 

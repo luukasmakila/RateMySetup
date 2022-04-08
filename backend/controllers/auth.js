@@ -14,7 +14,8 @@ const sign_up = async (request, response, next) => {
   const user = new User({
     email: body.email,
     username: body.username,
-    password: passwordHash
+    password: passwordHash,
+    likedPosts: []
   })
 
   try {

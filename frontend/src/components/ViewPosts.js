@@ -6,6 +6,7 @@ import { IconButton } from '@mui/material'
 
 const ViewPosts = () => {
   const [posts, setPosts] = useState([])
+  const userId = localStorage.getItem('userId')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,26 +15,6 @@ const ViewPosts = () => {
     }
     fetchData()
   }, [])
-
-  const updatePost = async (likedPost, rating) => {
-
-    if(rating === 'like'){
-      var newLikes = likedPost.likes
-      const updatedPost = {
-        ...likedPost,
-        likes: newLikes + 1
-      }
-      return updatedPost
-    }
-    else {
-      var newDislikes = likedPost.dislikes
-      const updatedPost = {
-        ...likedPost,
-        dislikes: newDislikes + 1
-      }
-      return updatedPost
-    }
-  }
 
   const sendUpdateRequest = async (ratedPost, updatedPost) => {
     try {
@@ -51,14 +32,79 @@ const ViewPosts = () => {
     }
   }
 
+  const addRatingToPost = async (post, rating) => {
+    if(rating === 'like'){
+      var newLikes = post.likes
+      post.likers.push(userId)
+      const updatedPost = {
+        ...post,
+        likes: newLikes + 1
+      }
+      return updatedPost
+    }
+    else {
+      var newDislikes = post.dislikes
+      post.dislikers.push(userId)
+      const updatedPost = {
+        ...post,
+        dislikes: newDislikes + 1
+      }
+      return updatedPost
+    }
+  }
+
+  const removeRatingFromPost = async (post, rating) => {
+    if(rating === 'like'){
+      var newLikes = post.likes
+      const index = post.likers.indexOf(userId)
+      post.likers.splice(index, 1)
+      const updatedPost = {
+        ...post,
+        likes: newLikes - 1
+      }
+      return updatedPost
+    }
+    else {
+      var newDislikes = post.dislikes
+      const index = post.dislikers.indexOf(userId)
+      post.dislikers.splice(index, 1)
+      const updatedPost = {
+        ...post,
+        dislikes: newDislikes - 1
+      }
+      return updatedPost
+    }
+  }
+
   const handleLike = async (likedPost) => {
-    const updatedPost = await updatePost(likedPost, 'like')
-    await sendUpdateRequest(likedPost, updatedPost)
+    if(likedPost.likers.includes(userId)){
+      const updatedPost = await removeRatingFromPost(likedPost, 'like')
+      await sendUpdateRequest(likedPost, updatedPost)
+      return
+    }
+    //else if(likedPost.dislikers.includes(userId)){
+      //return
+    //}
+    else{
+      const updatedPost = await addRatingToPost(likedPost, 'like')
+      await sendUpdateRequest(likedPost, updatedPost)
+      return
+    }
   }
 
   const handleDislike = async (dislikedPost) => {
-    const updatedPost = await updatePost(dislikedPost, 'dislike')
-    await sendUpdateRequest(dislikedPost, updatedPost)
+    if(dislikedPost.dislikers.includes(userId)){
+      const updatedPost = await removeRatingFromPost(dislikedPost, 'dislike')
+      await sendUpdateRequest(dislikedPost, updatedPost)
+      return
+    }
+    //else if(dislikedPost.likers.includes(userId)){
+      //return
+    //}
+    else{
+      const updatedPost = await addRatingToPost(dislikedPost, 'dislike')
+      await sendUpdateRequest(dislikedPost, updatedPost)
+    }
   }
   
   return (

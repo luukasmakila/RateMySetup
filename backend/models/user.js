@@ -5,6 +5,7 @@ const userSchema = mongoose.Schema({
   email: {type: String, required: true, unique: true},
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
+  reviewedPosts: { type: Array },
   posts: [
     {
       type: mongoose.Schema.Types.ObjectId,

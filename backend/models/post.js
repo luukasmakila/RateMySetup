@@ -7,6 +7,8 @@ const postSchema = new mongoose.Schema({
   author: { type: String, required: true},
   likes: { type: Number },
   dislikes: { type: Number },
+  likers: { type: Array },
+  dislikers: { type: Array },
   postDate: { type: Date, default: Date.now() },
   user: {
     type: mongoose.Schema.Types.ObjectId,

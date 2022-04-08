@@ -38,7 +38,7 @@ const CreatePost = () => {
   return (
     <div>
       <form className='setup-info' encType='multipart/form-data'>
-        <h2>Setup info</h2>
+        <h2>Create a post</h2>
         <label>Title</label>
         <input type='text' value={title} onChange={(e) => setTitle(e.target.value)}/>
         <label>Setup bio</label>
