@@ -6,6 +6,7 @@ const postSchema = new mongoose.Schema({
   setupImage: { type: String, required: true },
   author: { type: String, required: true},
   likes: { type: Number },
+  dislikes: { type: Number },
   postDate: { type: Date, default: Date.now() },
   user: {
     type: mongoose.Schema.Types.ObjectId,

@@ -16,8 +16,9 @@ const ViewPosts = () => {
   }, [])
 
   const updatePost = async (likedPost, rating) => {
-    var newLikes = likedPost.likes
+
     if(rating === 'like'){
+      var newLikes = likedPost.likes
       const updatedPost = {
         ...likedPost,
         likes: newLikes + 1
@@ -25,22 +26,21 @@ const ViewPosts = () => {
       return updatedPost
     }
     else {
+      var newDislikes = likedPost.dislikes
       const updatedPost = {
         ...likedPost,
-        likes: newLikes - 1
+        dislikes: newDislikes + 1
       }
       return updatedPost
     }
   }
 
-  const handleLike = async (likedPost) => {
-    const updatedPost = await updatePost(likedPost, 'like')
-
+  const sendUpdateRequest = async (ratedPost, updatedPost) => {
     try {
       const token = localStorage.getItem('authToken')
-      await axios.put('http://localhost:3001/api/private/posts/' + likedPost._id, updatedPost, {headers: {'authorization': token}})
+      await axios.put('http://localhost:3001/api/private/posts/' + ratedPost._id, updatedPost, {headers: {'authorization': token}})
       const newPosts = posts.map(post => {
-        if(post._id === likedPost._id){
+        if(post._id === ratedPost._id){
           return updatedPost
         }
         return post
@@ -51,22 +51,14 @@ const ViewPosts = () => {
     }
   }
 
-  const handleDislike = async (likedPost) => {
-    const updatedPost = await updatePost(likedPost, 'dislike')
+  const handleLike = async (likedPost) => {
+    const updatedPost = await updatePost(likedPost, 'like')
+    await sendUpdateRequest(likedPost, updatedPost)
+  }
 
-    try {
-      const token = localStorage.getItem('authToken')
-      await axios.put('http://localhost:3001/api/private/posts/' + likedPost._id, updatedPost, {headers: {'authorization': token}})
-      const newPosts = posts.map(post => {
-        if(post._id === likedPost._id){
-          return updatedPost
-        }
-        return post
-      })
-      setPosts(newPosts)
-    } catch (error) {
-      console.log(error)
-    }
+  const handleDislike = async (dislikedPost) => {
+    const updatedPost = await updatePost(dislikedPost, 'dislike')
+    await sendUpdateRequest(dislikedPost, updatedPost)
   }
   
   return (
@@ -89,7 +81,7 @@ const ViewPosts = () => {
               <IconButton onClick={ () => handleDislike(post) }>
                 <ThumbDownOffAltIcon/>
               </IconButton>
-              <p>{post.likes}</p>    
+              <p>{post.likes} {post.dislikes}</p>
             </div>
           </div>
           <br></br>

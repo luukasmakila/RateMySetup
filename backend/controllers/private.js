@@ -29,6 +29,7 @@ privateRouter.post('/create-post', upload.single('setupImage'), async (request, 
     title: request.body.title,
     author: user.username,
     likes: 0,
+    dislikes: 0,
     user: user._id
   })
 
@@ -59,8 +60,6 @@ privateRouter.get('/posts/:id', async (request, response, next) => {
 privateRouter.put('/posts/:id', async (request, response, next) => {
   const id = request.params.id
   const updatedPost = request.body
-  console.log(request.body)
-  console.log(id)
   const result = await Post.findByIdAndUpdate(id, updatedPost)
   response.status(200).json({success: true, message: 'post liked!'})
 })
