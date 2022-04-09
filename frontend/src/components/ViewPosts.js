@@ -77,14 +77,20 @@ const ViewPosts = () => {
   }
 
   const handleLike = async (likedPost) => {
+    //if already liked
     if(likedPost.likers.includes(userId)){
       const updatedPost = await removeRatingFromPost(likedPost, 'like')
       await sendUpdateRequest(likedPost, updatedPost)
       return
+    } //if already disliked
+    else if(likedPost.dislikers.includes(userId)){
+      //remove the dislike
+      const postWithRemovedDislike = await removeRatingFromPost(likedPost, 'dislike')
+      //add like
+      const updatedPost = await addRatingToPost(postWithRemovedDislike, 'like')
+      await sendUpdateRequest(likedPost, updatedPost)
+      return
     }
-    //else if(likedPost.dislikers.includes(userId)){
-      //return
-    //}
     else{
       const updatedPost = await addRatingToPost(likedPost, 'like')
       await sendUpdateRequest(likedPost, updatedPost)
@@ -98,9 +104,12 @@ const ViewPosts = () => {
       await sendUpdateRequest(dislikedPost, updatedPost)
       return
     }
-    //else if(dislikedPost.likers.includes(userId)){
-      //return
-    //}
+    else if(dislikedPost.likers.includes(userId)){
+      const postWithRemovedLike = await removeRatingFromPost(dislikedPost, 'like')
+      const updatedPost = await addRatingToPost(postWithRemovedLike, 'dislike')
+      await sendUpdateRequest(dislikedPost, updatedPost)
+      return
+    }
     else{
       const updatedPost = await addRatingToPost(dislikedPost, 'dislike')
       await sendUpdateRequest(dislikedPost, updatedPost)
