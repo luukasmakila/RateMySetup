@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt'
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt'
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import { IconButton } from '@mui/material'
 
 const ViewPosts = () => {
@@ -130,12 +132,22 @@ const ViewPosts = () => {
               <p>{post.bio}</p>
             </div>
             <div className='rating-buttons'>
-              <IconButton onClick={ () => handleLike(post) }>
-                <ThumbUpOffAltIcon/>
-              </IconButton>
-              <IconButton onClick={ () => handleDislike(post) }>
-                <ThumbDownOffAltIcon/>
-              </IconButton>
+              {post.likers.includes(userId)
+                ? <IconButton onClick={ () => handleLike(post) }>
+                    <ThumbUpAltIcon/>
+                  </IconButton>
+                : <IconButton onClick={ () => handleLike(post) }>
+                    <ThumbUpOffAltIcon/>
+                  </IconButton>
+              }
+              {post.dislikers.includes(userId)
+                ? <IconButton onClick={ () => handleDislike(post) }>
+                    <ThumbDownAltIcon/>
+                  </IconButton>
+                : <IconButton onClick={ () => handleDislike(post) }>
+                    <ThumbDownOffAltIcon/>
+                  </IconButton>
+              }
               <p>{post.likes} {post.dislikes}</p>
             </div>
           </div>
