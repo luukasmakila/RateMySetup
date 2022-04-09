@@ -161,12 +161,17 @@ const ViewPosts = () => {
                     <ThumbDownOffAltIcon/>
                   </IconButton>
               }
-              <p>{post.likes} {post.dislikes}</p>
             </div>
-            {post.user === userId
-              ? <button onClick={ () => handleRemove(post) }>remove post</button>
-              : <></> 
-            }
+            <div className='counters'>
+              <p>{post.likes}</p>
+              <p>{post.dislikes}</p>
+            </div>
+            <div className='post-delete'>
+              {post.user === userId
+                ? <button className='btn' onClick={ () => handleRemove(post) }>remove post</button>
+                : <></> 
+              }
+            </div>
           </div>
           <br></br>
         </div>
