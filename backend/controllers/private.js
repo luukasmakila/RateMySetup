@@ -3,6 +3,7 @@ const User = require('../models/user')
 const express = require('express')
 const privateRouter = express.Router()
 const multer = require('multer')
+const fs = require('fs')
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
@@ -17,7 +18,6 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage})
 
 //create a new post
-//because we are using multer the routes have to be defined here...
 privateRouter.post('/create-post', upload.single('setupImage'), async (request, response, next) => {
   const user = await User.findById(request.headers.authorization)
 
@@ -62,8 +62,24 @@ privateRouter.get('/posts/:id', async (request, response, next) => {
 privateRouter.put('/posts/:id', async (request, response, next) => {
   const id = request.params.id
   const updatedPost = request.body
-  const result = await Post.findByIdAndUpdate(id, updatedPost)
+  await Post.findByIdAndUpdate(id, updatedPost)
   response.status(200).json({success: true, message: 'post liked!'})
+})
+
+privateRouter.delete('/posts/:id', async (request, response, next) => {
+  const id = request.params.id
+  const post = await Post.findById(id)
+  const imageName = post.setupImage
+  const pathToImage = '../frontend/public/uploads/' + imageName
+  try {
+    fs.unlink(pathToImage, (err) => {
+      if(err) console.log(err)
+    })
+    await Post.findByIdAndDelete(id)
+    response.status(200).json({success: true, message: 'post deleted!'}) 
+  } catch (error) {
+    console.log(error)
+  }
 })
 
 module.exports = privateRouter

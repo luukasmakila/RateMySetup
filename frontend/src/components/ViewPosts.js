@@ -117,10 +117,23 @@ const ViewPosts = () => {
       await sendUpdateRequest(dislikedPost, updatedPost)
     }
   }
+
+  const handleRemove = async (post) => {
+    const postId = post._id
+    try{
+      const token = localStorage.getItem('authToken')
+      await axios.delete('http://localhost:3001/api/private/posts/' + postId, {headers: {'authorization': token}})
+      const index = posts.indexOf(post)
+      const newPosts = posts.splice(index, 1)
+      setPosts(newPosts)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   
   return (
     <div className='view-posts'>
-      <h2>Posts by others</h2>
+      <h2>Community posts</h2>
       <br></br>
       {posts.map((post, idx) => (
         <div key={idx}>
@@ -150,6 +163,10 @@ const ViewPosts = () => {
               }
               <p>{post.likes} {post.dislikes}</p>
             </div>
+            {post.user === userId
+              ? <button onClick={ () => handleRemove(post) }>remove post</button>
+              : <></> 
+            }
           </div>
           <br></br>
         </div>
