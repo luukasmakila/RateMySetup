@@ -123,8 +123,7 @@ const ViewPosts = () => {
     try{
       const token = localStorage.getItem('authToken')
       await axios.delete('http://localhost:3001/api/private/posts/' + postId, {headers: {'authorization': token}})
-      const index = posts.indexOf(post)
-      const newPosts = posts.splice(index, 1)
+      const newPosts = posts.filter(oldpost => oldpost._id !== postId)
       setPosts(newPosts)
     } catch (error) {
       console.log(error)
@@ -179,7 +178,5 @@ const ViewPosts = () => {
     </div>
   )
 }
-
-//<div className='card-footer'><Link to={'/posts/' + post._id} params={post}><button className='btn'>View Post</button></Link></div>
 
 export default ViewPosts
