@@ -122,7 +122,8 @@ const ViewPosts = () => {
     const postId = post._id
     try{
       const token = localStorage.getItem('authToken')
-      await axios.delete('http://localhost:3001/api/private/posts/' + postId, {headers: {'authorization': token}})
+      const userId = localStorage.getItem('userId')
+      await axios.delete('http://localhost:3001/api/private/posts/' + postId, {headers: {'authorization': token, 'userId': userId}})
       const newPosts = posts.filter(oldpost => oldpost._id !== postId)
       setPosts(newPosts)
     } catch (error) {

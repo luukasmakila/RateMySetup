@@ -51,13 +51,6 @@ privateRouter.get('/posts', async (request, response, next) => {
   response.json(posts.map(post => post.toJSON()))
 })
 
-///get a single post
-privateRouter.get('/posts/:id', async (request, response, next) => {
-  const post = await Post.findById(request.params.id)
-  console.log(post)
-  response.json(post.toJSON())
-})
-
 //add like / dislike
 privateRouter.put('/posts/:id', async (request, response, next) => {
   const id = request.params.id
@@ -68,9 +61,15 @@ privateRouter.put('/posts/:id', async (request, response, next) => {
 
 privateRouter.delete('/posts/:id', async (request, response, next) => {
   const id = request.params.id
+  const userId = request.headers.userid
   const post = await Post.findById(id)
+
+  //if user is not the creator of the post
+  if(userId !== post.author) response.status(400).json({success: false, message: 'unauthorized request'})
+
   const imageName = post.setupImage
   const pathToImage = '../frontend/public/uploads/' + imageName
+
   try {
     fs.unlink(pathToImage, (err) => {
       if(err) console.log(err)
@@ -78,7 +77,7 @@ privateRouter.delete('/posts/:id', async (request, response, next) => {
     await Post.findByIdAndDelete(id)
     response.status(200).json({success: true, message: 'post deleted!'}) 
   } catch (error) {
-    console.log(error)
+    response.status(404).json({success: false, message: 'post not found.'})
   }
 })
 
