@@ -29,9 +29,9 @@ const CreatePost = () => {
     }
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    postToDb()
+    await postToDb()
     navigate('/posts')
   }
 
