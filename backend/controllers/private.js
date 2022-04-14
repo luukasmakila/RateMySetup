@@ -4,6 +4,8 @@ const express = require('express')
 const privateRouter = express.Router()
 const multer = require('multer')
 const fs = require('fs')
+const JWT = require('jsonwebtoken')
+require('dotenv').config()
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
@@ -21,8 +23,8 @@ const upload = multer({storage: storage})
 privateRouter.post('/create-post', upload.single('setupImage'), async (request, response, next) => {
   const user = await User.findById(request.headers.authorization)
 
-  if(!user) return response.status(400).json({success: false, message: 'unauthorized request'})
-
+  if(!user) return response.status(401).json({success: false, message: 'unauthorized request'})
+  
   const newPost = new Post({
     bio: request.body.bio,
     setupImage: request.file.originalname,
@@ -32,7 +34,7 @@ privateRouter.post('/create-post', upload.single('setupImage'), async (request, 
     dislikes: 0,
     likers: [],
     dislikers: [],
-    user: user._id
+    user: user._id.toString()
   })
 
   try {
@@ -61,11 +63,13 @@ privateRouter.put('/posts/:id', async (request, response, next) => {
 
 privateRouter.delete('/posts/:id', async (request, response, next) => {
   const id = request.params.id
-  const userId = request.headers.userid
+  const authToken = request.headers.authorization
+  const decodedJWT = JWT.verify(authToken, process.env.JWT_SECRET)
+  const userId = decodedJWT.id
   const post = await Post.findById(id)
 
   //if user is not the creator of the post
-  if(userId !== post.author) response.status(400).json({success: false, message: 'unauthorized request'})
+  if(userId !== post.user.toString()) return response.status(401).json({success: false, message: 'unauthorized request'})
 
   const imageName = post.setupImage
   const pathToImage = '../frontend/public/uploads/' + imageName

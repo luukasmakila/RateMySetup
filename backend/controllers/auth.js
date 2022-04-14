@@ -64,7 +64,7 @@ const login = async (request, response, next) => {
 
 //signs token and sends it back
 const getToken = (user) => {
-  return JWT.sign({id: user.__id}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES})
+  return JWT.sign({id: user._id}, process.env.JWT_SECRET, { noTimestamp: true, expiresIn: '1h'})
 }
 
 module.exports = {
