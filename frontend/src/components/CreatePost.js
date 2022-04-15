@@ -40,12 +40,16 @@ const CreatePost = () => {
       <form className='setup-info' encType='multipart/form-data'>
         <h2>Create a post</h2>
         <label>Title</label>
-        <input type='text' value={title} onChange={(e) => setTitle(e.target.value)}/>
-        <label>Setup bio</label>
-        <input type='text' value={bio} onChange={(e) => setBio(e.target.value)}/>
-        <label>Setup picture</label>
-        <input type='file' filename='setupImage' onChange={handleInput}/>
-        <button type='button' onClick={handleSubmit}>Submit</button>
+        <input type='text' value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Enter your post title'/>
+        <br/>
+        <label>Setup info</label>
+        <input type='text' value={bio} onChange={(e) => setBio(e.target.value)} placeholder='Tell more bout your setup'/>
+        <br/>
+        <div className='choose-photo'>
+          <input type='file' id='file' filename='setupImage' accept='image/*' onChange={handleInput}/>
+          <label for='file'>add a photo</label>
+        </div>
+        <button type='button' className='btn' onClick={handleSubmit}>Submit</button>
       </form>
     </div>
   )

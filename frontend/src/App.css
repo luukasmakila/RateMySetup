@@ -73,6 +73,17 @@ nav {
   margin-top: 20px;
 }
 
+.choose-photo input{
+  display: none;
+}
+
+.choose-photo label{
+  color: white;
+  background-color: rgb(106, 90, 205);
+  font-size: large;
+}
+
+
 .create-post-image {
   display: flex;
   justify-content: center;
@@ -86,7 +97,7 @@ nav {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  color: #2c2c2c;
+  color: rgb(106, 90, 205);
 }
 
 .login__form {
@@ -96,7 +107,7 @@ nav {
 
 .login__form button {
   cursor: pointer;
-  background-color: #2c2c2c;
+  background-color: rgb(106, 90, 205);
   color: white;
 }
 
@@ -108,7 +119,7 @@ nav {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  color: #2c2c2c;
+  color: rgb(106, 90, 205);
 }
 
 .signup__form {
@@ -118,7 +129,7 @@ nav {
 
 .signup__form button {
   cursor: pointer;
-  background-color: #2c2c2c;
+  background-color: rgb(106, 90, 205);
   color: white;
 }
 
