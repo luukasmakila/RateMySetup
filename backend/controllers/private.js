@@ -29,7 +29,7 @@ privateRouter.post('/create-post', upload.single('setupImage'), async (request, 
   const user = await User.findById(request.headers.authorization)
 
   if(!user) return response.status(401).json({success: false, message: 'unauthorized request'})
-  
+  console.log(request.body.bio)
   const newPost = new Post({
     bio: request.body.bio,
     setupImage: request.file.originalname,

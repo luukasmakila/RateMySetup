@@ -132,7 +132,7 @@ const ViewPosts = () => {
       console.log(error)
     }
   }
-  
+
   return (
     <div className='view-posts'>
       <h2>Community posts</h2>
@@ -142,9 +142,10 @@ const ViewPosts = () => {
           <div className='card'>
             <div className='card-header'><img src={'http://' + window.location.hostname + `:3001/public/uploads/${post.setupImage}`} alt='setupImage'/></div>
             <div className='card-body'>
-              <h3>{post.title}</h3>
+              <h3>{post.author}</h3>
+              <h4>{post.title}</h4>
               <br/>
-              <p>{post.bio}</p>
+              <p className='display-linebreak'>{post.bio}</p>
             </div>
             <div className='rating-buttons'>
               {post.likers.includes(userId)

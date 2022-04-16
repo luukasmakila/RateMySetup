@@ -284,7 +284,20 @@ nav {
 .card-body {
   padding: 0 var(--padding);
   font-size: 0.9rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0,5rem;
+}
+
+.display-linebreak {
+  white-space: pre-line;
+}
+
+.card-body h3 {
+  margin-bottom: 10px;
+}
+
+.card-body p {
+  display: flex;
+  flex-direction: column;
 }
 
 .card-footer {

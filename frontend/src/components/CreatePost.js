@@ -35,6 +35,8 @@ const CreatePost = () => {
     navigate('/posts')
   }
 
+  console.log(bio)
+
   return (
     <div>
       <form className='setup-info' encType='multipart/form-data'>
@@ -43,7 +45,7 @@ const CreatePost = () => {
         <input type='text' value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Enter your post title'/>
         <br/>
         <label>Setup info</label>
-        <input type='text' value={bio} onChange={(e) => setBio(e.target.value)} placeholder='Tell more bout your setup'/>
+        <textarea name='bio' rows='5' cols='50' value={bio} onChange={(e) => setBio(e.target.value)} placeholder='Tell more bout your setup'/>
         <br/>
         <div className='choose-photo'>
           <input type='file' id='file' filename='setupImage' accept='image/*' onChange={handleInput}/>
