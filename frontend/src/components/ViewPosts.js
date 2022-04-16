@@ -12,7 +12,7 @@ const ViewPosts = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('http://localhost:3001/api/private/posts')
+      const result = await axios.get('http://' + window.location.hostname + ':3001/api/private/posts')
       setPosts(result.data)
     }
     fetchData()
@@ -21,7 +21,7 @@ const ViewPosts = () => {
   const sendUpdateRequest = async (ratedPost, updatedPost) => {
     try {
       const token = localStorage.getItem('authToken')
-      await axios.put('http://localhost:3001/api/private/posts/' + ratedPost._id, updatedPost, {headers: {'authorization': token}})
+      await axios.put('http://' + window.location.hostname + ':3001/api/private/posts/' + ratedPost._id, updatedPost, {headers: {'authorization': token}})
       const newPosts = posts.map(post => {
         if(post._id === ratedPost._id){
           return updatedPost
@@ -123,7 +123,7 @@ const ViewPosts = () => {
     const postId = post._id
     try{
       const token = localStorage.getItem('authToken')
-      await axios.delete('http://localhost:3001/api/private/posts/' + postId, {headers: {'authorization': token}})
+      await axios.delete('http://' + window.location.hostname + ':3001/api/private/posts/' + postId, {headers: {'authorization': token}})
       const newPosts = posts.filter(oldpost => oldpost._id !== postId)
       setPosts(newPosts)
     } catch (error) {

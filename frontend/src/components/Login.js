@@ -15,7 +15,7 @@ const Login = () => {
     }
     
     try {
-      const result = await axios.post('http://localhost:3001/api/auth/login', user)
+      const result = await axios.post('http://' + window.location.hostname + ':3001/api/auth/login', user)
       const token = result.data.token
       const userId = result.data.id
       localStorage.setItem('authToken', token)
