@@ -120,6 +120,8 @@ const ViewPosts = () => {
 
   const handleRemove = async (post) => {
 
+    if(window.confirm('are you sure you want to delete this post?') === false) return
+
     const postId = post._id
     try{
       const token = localStorage.getItem('authToken')
@@ -138,7 +140,7 @@ const ViewPosts = () => {
       {posts.map((post, idx) => (
         <div key={idx}>
           <div className='card'>
-            <div className='card-header'><img src={`/uploads/${post.setupImage}`} alt='setupImage'/></div>
+            <div className='card-header'><img src={'http://' + window.location.hostname + `:3001/public/uploads/${post.setupImage}`} alt='setupImage'/></div>
             <div className='card-body'>
               <h3>{post.title}</h3>
               <br/>

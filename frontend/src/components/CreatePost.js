@@ -47,7 +47,7 @@ const CreatePost = () => {
         <br/>
         <div className='choose-photo'>
           <input type='file' id='file' filename='setupImage' accept='image/*' onChange={handleInput}/>
-          <label for='file'>add a photo</label>
+          <label htmlFor='file'>add a photo</label>
         </div>
         <button type='button' className='btn' onClick={handleSubmit}>Submit</button>
       </form>
