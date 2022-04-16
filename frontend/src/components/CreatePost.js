@@ -35,8 +35,6 @@ const CreatePost = () => {
     navigate('/posts')
   }
 
-  console.log(bio)
-
   return (
     <div>
       <form className='setup-info' encType='multipart/form-data'>

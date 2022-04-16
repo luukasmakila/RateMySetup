@@ -19,17 +19,12 @@ const storage = multer.diskStorage({
 //upload image to uploads folder
 const upload = multer({storage: storage})
 
-privateRouter.get('/get-image/:id', async (request, resposne, next) => {
-  const imageName = request.params.id
-  console.log(imageName)
-})
-
 //create a new post
 privateRouter.post('/create-post', upload.single('setupImage'), async (request, response, next) => {
   const user = await User.findById(request.headers.authorization)
 
   if(!user) return response.status(401).json({success: false, message: 'unauthorized request'})
-  console.log(request.body.bio)
+
   const newPost = new Post({
     bio: request.body.bio,
     setupImage: request.file.originalname,
