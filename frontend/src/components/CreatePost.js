@@ -43,7 +43,7 @@ const CreatePost = () => {
         <input type='text' value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Enter your post title'/>
         <br/>
         <label>Setup info</label>
-        <textarea name='bio' rows='5' cols='50' value={bio} onChange={(e) => setBio(e.target.value)} placeholder='Tell more bout your setup'/>
+        <textarea name='bio' rows='10' cols='50' value={bio} onChange={(e) => setBio(e.target.value)} placeholder='Tell more bout your setup'/>
         <br/>
         <div className='choose-photo'>
           <input type='file' id='file' filename='setupImage' accept='image/*' onChange={handleInput}/>
