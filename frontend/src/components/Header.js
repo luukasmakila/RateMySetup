@@ -16,8 +16,6 @@ const Header = () => {
     localStorage.clear()
   }
 
-  console.log('hello')
-
   return (
     <nav>
       <ul className={renderClasses()}>

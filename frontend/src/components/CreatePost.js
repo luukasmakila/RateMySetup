@@ -22,7 +22,7 @@ const CreatePost = () => {
 
     try {
       const userId = localStorage.getItem('userId')
-      const result = await axios.post('http://' + window.location.hostname + ':3001/api/private/create-post', formData, {headers: {'authorization': userId}})
+      const result = await axios.post('http://ec2-54-164-128-22.compute-1.amazonaws.com:3001/api/private/create-post', formData, {headers: {'authorization': userId}})
       console.log(result.data)
     } catch (error) {
       console.log(error.message)

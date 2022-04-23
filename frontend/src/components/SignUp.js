@@ -20,7 +20,7 @@ const SignUp = () => {
       password
     }
 
-    const result = await axios.post('http://' + window.location.hostname + ':3001/api/auth/sign-up', newUser)
+    const result = await axios.post('http://ec2-54-164-128-22.compute-1.amazonaws.com:3001/api/auth/sign-up', newUser)
     const token = result.data.token
     const userId = result.data.id
     localStorage.setItem('authToken', token)
