@@ -32,7 +32,7 @@ const CreatePost = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     await postToDb()
-    navigate('/posts')
+    navigate('/')
   }
 
   return (
