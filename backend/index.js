@@ -27,8 +27,6 @@ mongoose.connect(MONGO_URI)
 //API ENDPOINTS
 app.use('/api/auth', authRouter)
 app.use('/api/private', privateRouter)
-app.use('/public/uploads', express.static(__dirname + '/public/uploads/'));
-
 
 //LISTENER
 app.listen(PORT, () => {

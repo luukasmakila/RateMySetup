@@ -2,28 +2,50 @@ const Post = require('../models/post')
 const User = require('../models/user')
 const express = require('express')
 const privateRouter = express.Router()
-const multer = require('multer')
+const Multer = require('multer')
 const fs = require('fs')
 const JWT = require('jsonwebtoken')
 require('dotenv').config()
+const {Storage} = require('@google-cloud/storage')
+const path = require('path')
 
-const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(null, './public/uploads/')
-  },
-  filename: (req, file, callback) => {
-    callback(null, file.originalname)
+//config multer
+const multer = Multer({
+  storage: Multer.memoryStorage(),
+  limits : {
+    fileSize: 5 * 1024 * 1024
   }
 })
 
-//upload image to uploads folder
-const upload = multer({storage: storage})
+//connect to google cloud
+const storage = new Storage({
+  keyFilename: path.join(__dirname, '../ratemysetup-47737e5e2173.json'),
+  projectId: 'ratemysetup'
+})
+
+//google cloud bucket
+const rateMySetupBucket = storage.bucket('ratemysetup-bucket')
 
 //create a new post
-privateRouter.post('/create-post', upload.single('setupImage'), async (request, response, next) => {
-  const user = await User.findById(request.headers.authorization)
+privateRouter.post('/create-post', multer.single('setupImage'), async (request, response, next) => {
 
+  if(!request.file) return response.status(400).json({success: false, message: 'no file uploaded'})
+
+  const user = await User.findById(request.headers.authorization)
   if(!user) return response.status(401).json({success: false, message: 'unauthorized request'})
+
+  //upload image to google cloud storage
+  try {
+    const blob = rateMySetupBucket.file(request.file.originalname)
+    const blobStream = blob.createWriteStream()
+
+    blobStream.on('finish',() => {
+      console.log('image upload successfull')
+    })
+    blobStream.end(request.file.buffer)
+  } catch (error) {
+    response.status(400).json({success: false, message: 'failed to create the post.'})
+  }
 
   const newPost = new Post({
     bio: request.body.bio,
@@ -37,6 +59,7 @@ privateRouter.post('/create-post', upload.single('setupImage'), async (request, 
     user: user._id.toString()
   })
 
+  //upload post to MongoDB
   try {
     const post = await newPost.save()
     user.posts = user.posts.concat(post)
@@ -72,12 +95,10 @@ privateRouter.delete('/posts/:id', async (request, response, next) => {
   if(userId !== post.user.toString()) return response.status(401).json({success: false, message: 'unauthorized request'})
 
   const imageName = post.setupImage
-  const pathToImage = './public/uploads/' + imageName
 
+  //delete image from google storage and post info from MongoDB
   try {
-    fs.unlink(pathToImage, (err) => {
-      if(err) console.log(err)
-    })
+    await storage.bucket('ratemysetup-bucket').file(imageName).delete()
     await Post.findByIdAndDelete(id)
     response.status(200).json({success: true, message: 'post deleted!'}) 
   } catch (error) {
