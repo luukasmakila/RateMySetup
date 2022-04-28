@@ -6,6 +6,8 @@ Backend is a containerized <b>EC2 instance</b>, then free tier ran out so I host
 
 For image storage im using <b>Google cloud storage</b>
 
+For the database im using <b>MongoDB atlas</b>
+
 <b>For now users can</b>:
 - Create an account and login
 - Upload an image of their gaming/work setup and create a post
