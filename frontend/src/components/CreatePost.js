@@ -22,7 +22,7 @@ const CreatePost = () => {
 
     try {
       const userId = localStorage.getItem('userId')
-      const result = await axios.post('https://cors-everywhere-me.herokuapp.com/http://ec2-35-173-188-150.compute-1.amazonaws.com:3001/api/private/create-post', formData, {headers: {'authorization': userId}})
+      const result = await axios.post('https://cors-everywhere-me.herokuapp.com/http://ec2-54-86-242-191.compute-1.amazonaws.com:3001/api/private/create-post', formData, {headers: {'authorization': userId}})
       console.log(result)
     } catch (error) {
       console.log(error.message)
