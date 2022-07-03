@@ -2,11 +2,11 @@
 
 App link: https://master.d3u4uo1e3a4x97.amplifyapp.com
 
-Backend is a containerized <b>EC2 instance</b>, then free tier ran out so I hosted the frontend on <b>AWS amplify</b>
+Backend hosted on AWS ECS and frontend hosted on AWS Amplify
 
-For image storage im using <b>Google cloud storage</b>
+For image storage im using Google cloud storage
 
-For the database im using <b>MongoDB atlas</b>
+For the database im using MongoDB atlas
 
 <b>For now users can</b>:
 - Create an account and login
