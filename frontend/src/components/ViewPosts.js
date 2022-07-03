@@ -12,7 +12,7 @@ const ViewPosts = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('https://cors-everywhere-me.herokuapp.com/http://ec2-54-86-242-191.compute-1.amazonaws.com:3001/api/private/posts')
+      const result = await axios.get('https://cors-everywhere-me.herokuapp.com/http://ec2-100-24-29-225.compute-1.amazonaws.com:3001/api/private/posts')
       setPosts(result.data)
     }
     fetchData()
@@ -21,7 +21,7 @@ const ViewPosts = () => {
   const sendUpdateRequest = async (ratedPost, updatedPost) => {
     try {
       const token = localStorage.getItem('authToken')
-      await axios.put('https://cors-everywhere-me.herokuapp.com/http://ec2-54-86-242-191.compute-1.amazonaws.com:3001/api/private/posts/' + ratedPost._id, updatedPost, {headers: {'authorization': token}})
+      await axios.put('https://cors-everywhere-me.herokuapp.com/http://ec2-100-24-29-225.compute-1.amazonaws.com:3001/api/private/posts/' + ratedPost._id, updatedPost, {headers: {'authorization': token}})
       const newPosts = posts.map(post => {
         if(post._id === ratedPost._id){
           return updatedPost
@@ -125,7 +125,7 @@ const ViewPosts = () => {
     const postId = post._id
     try{
       const token = localStorage.getItem('authToken')
-      await axios.delete('https://cors-everywhere-me.herokuapp.com/http://ec2-54-86-242-191.compute-1.amazonaws.com:3001/api/private/posts/' + postId, {headers: {'authorization': token}})
+      await axios.delete('https://cors-everywhere-me.herokuapp.com/http://ec2-100-24-29-225.compute-1.amazonaws.com:3001/api/private/posts/' + postId, {headers: {'authorization': token}})
       const newPosts = posts.filter(oldpost => oldpost._id !== postId)
       setPosts(newPosts)
     } catch (error) {

@@ -20,7 +20,7 @@ const SignUp = () => {
       password
     }
 
-    const result = await axios.post('https://cors-everywhere-me.herokuapp.com/http://ec2-54-86-242-191.compute-1.amazonaws.com:3001/api/auth/sign-up', newUser)
+    const result = await axios.post('https://cors-everywhere-me.herokuapp.com/http://ec2-100-24-29-225.compute-1.amazonaws.com:3001/api/auth/sign-up', newUser)
     const token = result.data.token
     const userId = result.data.id
     localStorage.setItem('authToken', token)
