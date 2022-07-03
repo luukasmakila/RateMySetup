@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
 
-const BACKEND_BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL
+const BACKEND_BASE_URL = "http://ec2-3-81-145-169.compute-1.amazonaws.com:8888"
 
 const CreatePost = () => {
   const navigate = useNavigate()

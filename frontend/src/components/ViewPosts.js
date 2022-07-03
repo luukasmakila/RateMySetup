@@ -6,7 +6,7 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt'
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import { IconButton } from '@mui/material'
 
-const BACKEND_BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL
+const BACKEND_BASE_URL = "http://ec2-3-81-145-169.compute-1.amazonaws.com:8888"
 
 const ViewPosts = () => {
   const [posts, setPosts] = useState([])
