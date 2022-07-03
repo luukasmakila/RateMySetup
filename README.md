@@ -20,3 +20,7 @@ For the database im using MongoDB atlas
 - Notifications (ex. post creation / login succeeded, login failed / failed to create a post error)
 - UI improvements and style changes
 - Mobile optimization
+
+![alt text](https://github.com/luukasmakila/RateMySetup/blob/master/rms%20ss2.png)
+
+![alt text](https://github.com/luukasmakila/RateMySetup/blob/master/rms%20ss.png)
