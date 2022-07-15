@@ -1,5 +1,7 @@
 # RateMySetup
 
+# Undergoing mongodb cluster upgrade. DB not working.
+
 App link: https://master.d3u4uo1e3a4x97.amplifyapp.com
 
 ### What is it?
