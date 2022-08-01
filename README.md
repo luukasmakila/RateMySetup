@@ -1,5 +1,7 @@
 # RateMySetup
 
+# DB upgrade and S3 migration done, hosting the backend soon.
+
 App link: https://master.d3u4uo1e3a4x97.amplifyapp.com
 
 ### What is it?
