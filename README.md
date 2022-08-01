@@ -13,8 +13,8 @@ Web based application where users are able to post their gaming / work setups.
 Although passwords are securely hashed I understand you might not want to create an account just for testing the app so heres a dummy user you can use:
 </br>
 
-<b>email: testi@gmail.com</b> </br>
-<b>password: 123</b>
+<b>email: test@gmail.com</b> </br>
+<b>password: 12345</b>
 
 ### How is the hosting handled?
 
