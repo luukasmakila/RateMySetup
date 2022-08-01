@@ -14,7 +14,7 @@ const ViewPosts = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(`https://cors-everywhere-me.herokuapp.com/${BACKEND_BASE_URL}/api/private/posts`)
+      const result = await axios.get(`http://localhost:3001/api/private/posts`)
       setPosts(result.data)
     }
     fetchData()
@@ -23,7 +23,7 @@ const ViewPosts = () => {
   const sendUpdateRequest = async (ratedPost, updatedPost) => {
     try {
       const token = localStorage.getItem('authToken')
-      await axios.put(`https://cors-everywhere-me.herokuapp.com/${BACKEND_BASE_URL}/api/private/posts/` + ratedPost._id, updatedPost, {headers: {'authorization': token}})
+      await axios.put(`http://localhost:3001/api/private/posts/` + ratedPost._id, updatedPost, {headers: {'authorization': token}})
       const newPosts = posts.map(post => {
         if(post._id === ratedPost._id){
           return updatedPost
@@ -127,7 +127,7 @@ const ViewPosts = () => {
     const postId = post._id
     try{
       const token = localStorage.getItem('authToken')
-      await axios.delete(`https://cors-everywhere-me.herokuapp.com/${BACKEND_BASE_URL}/api/private/posts/` + postId, {headers: {'authorization': token}})
+      await axios.delete(`http://localhost:3001/api/private/posts/` + postId, {headers: {'authorization': token}})
       const newPosts = posts.filter(oldpost => oldpost._id !== postId)
       setPosts(newPosts)
     } catch (error) {
@@ -142,7 +142,7 @@ const ViewPosts = () => {
       {posts.map((post, idx) => (
         <div key={idx}>
           <div className='card'>
-            <div className='card-header'><img src={`https://storage.googleapis.com/ratemysetup-bucket/${post.setupImage}`} alt='setupImage'/></div>
+            <div className='card-header'><img src={`https://ratemysetup.s3.amazonaws.com/${post.setupImage}`} alt='setupImage'/></div>
             <div className='card-body'>
               <h3>{post.author}</h3>
               <h4>{post.title}</h4>

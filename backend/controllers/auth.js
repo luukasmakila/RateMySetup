@@ -5,6 +5,7 @@ require('dotenv').config()
 
 const sign_up = async (request, response, next) => {
   const body = request.body
+  console.log(request.body)
 
   //hash password
   const saltRounds = 10

@@ -1,54 +1,66 @@
+const express = require('express')
+
 const Post = require('../models/post')
 const User = require('../models/user')
-const express = require('express')
-const privateRouter = express.Router()
-const Multer = require('multer')
-const JWT = require('jsonwebtoken')
-require('dotenv').config()
-const {Storage} = require('@google-cloud/storage')
-const path = require('path')
 
-//config multer
-const multer = Multer({
-  storage: Multer.memoryStorage(),
-  limits : {
-    fileSize: 5 * 1024 * 1024
+const privateRouter = express.Router()
+const multer = require('multer')
+const JWT = require('jsonwebtoken')
+
+require('dotenv').config()
+
+const fs = require("fs")
+const util = require('util')
+const unlinkFile = util.promisify(fs.unlink)
+
+
+const S3 = require('aws-sdk/clients/s3')
+
+const bucketName = process.env.BUCKET_NAME
+const bucketRegion = process.env.BUCKET_REGION
+const accessKey = process.env.ACCESS_KEY
+const secretAccessKey = process.env.SECRET_ACCESS_KEY
+
+const s3 = new S3({
+  region: bucketRegion,
+  credentials: {
+    accessKeyId: accessKey,
+    secretAccessKey: secretAccessKey
   }
 })
 
-//connect to google cloud
-const storage = new Storage({
-  keyFilename: path.join(__dirname, '../ratemysetup-47737e5e2173.json'),
-  projectId: 'ratemysetup'
-})
+//config multer
+const upload = multer({ dest: 'uploads/' })
 
-//google cloud bucket
-const rateMySetupBucket = storage.bucket('ratemysetup-bucket')
+const uploadToS3 = (file) => {
+  const fileStream = fs.readFileSync(file.path)
+  const uploadParams = {
+    Bucket: bucketName,
+    Body: fileStream,
+    Key: file.originalname
+  }
+  return s3.upload(uploadParams).promise()
+}
 
 //create a new post
-privateRouter.post('/create-post', multer.single('setupImage'), async (request, response, next) => {
-
-  if(!request.file) return response.status(400).json({success: false, message: 'no file uploaded'})
+privateRouter.post('/create-post', upload.single('setupImage'), async (request, response, next) => {
+  const file = request.file
+  if(!file) return response.status(400).json({success: false, message: 'no file uploaded'})
 
   const user = await User.findById(request.headers.authorization)
   if(!user) return response.status(401).json({success: false, message: 'unauthorized request'})
 
-  //upload image to google cloud storage
+  //upload image to AWS S3
   try {
-    const blob = rateMySetupBucket.file(request.file.originalname)
-    const blobStream = blob.createWriteStream()
-
-    blobStream.on('finish',() => {
-      console.log('image upload successfull')
-    })
-    blobStream.end(request.file.buffer)
+    await uploadToS3(file)
+    await unlinkFile(file.path)
   } catch (error) {
     response.status(400).json({success: false, message: 'failed to create the post.'})
   }
 
   const newPost = new Post({
     bio: request.body.bio,
-    setupImage: request.file.originalname,
+    setupImage: file.originalname,
     title: request.body.title,
     author: user.username,
     likes: 0,
