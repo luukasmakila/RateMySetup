@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
 
-const BACKEND_BASE_URL = "http://ec2-3-81-145-169.compute-1.amazonaws.com:8888"
+const BACKEND_BASE_URL = "http://ec2-3-88-48-170.compute-1.amazonaws.com:8888"
 
 const Login = () => {
   const navigate = useNavigate()
@@ -17,7 +17,7 @@ const Login = () => {
     }
     
     try {
-      const result = await axios.post(`http://localhost:3001/api/auth/login`, user)
+      const result = await axios.post(`https://cors-everywhere-me.herokuapp.com/${BACKEND_BASE_URL}/api/auth/login`, user)
       const token = result.data.token
       const userId = result.data.id
       localStorage.setItem('authToken', token)
