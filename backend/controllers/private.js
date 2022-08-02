@@ -107,7 +107,7 @@ privateRouter.delete('/posts/:id', async (request, response, next) => {
 
   const imageName = post.setupImage
 
-  //delete image from google storage and post info from MongoDB
+  //delete image from s3 and post info from MongoDB
   try {
     await s3.deleteObject({Bucket: bucketName, Key: imageName}).promise()
     await Post.findByIdAndDelete(id)
