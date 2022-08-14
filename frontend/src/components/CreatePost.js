@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
 
-const BACKEND_BASE_URL = "http://ec2-3-88-48-170.compute-1.amazonaws.com:8888"
+const BACKEND_BASE_URL = "http://localhost:3001"
 
 const CreatePost = () => {
   const navigate = useNavigate()
@@ -24,7 +24,7 @@ const CreatePost = () => {
 
     try {
       const userId = localStorage.getItem('userId')
-      const result = await axios.post(`https://cors-everywhere-me.herokuapp.com/${BACKEND_BASE_URL}/api/private/create-post`, formData, {headers: {'authorization': userId}})
+      const result = await axios.post(`${BACKEND_BASE_URL}/api/private/create-post`, formData, {headers: {'authorization': userId}})
       console.log(result)
     } catch (error) {
       console.log(error.message)

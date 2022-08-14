@@ -5,7 +5,6 @@ require('dotenv').config()
 
 const sign_up = async (request, response, next) => {
   const body = request.body
-  console.log(request.body)
 
   //hash password
   const saltRounds = 10
@@ -21,7 +20,7 @@ const sign_up = async (request, response, next) => {
 
   try {
     //saves user
-    const savedUser = await user.save()
+    const savedUser = await user.save({validateModifiedOnly: true})
     const token = getToken(savedUser)
     const id = savedUser._id
     response.status(201).json({success: true, message: 'Signed up!', token, id})
@@ -41,7 +40,6 @@ const login = async (request, response, next) => {
     //email must be unique so "findOne" works well
     const user = await User.findOne({ email })
     if(!user){
-      console.log('email does not match any users')
       return response.status(404).json({success: false, error: 'Invalid credentials'})
     }
 

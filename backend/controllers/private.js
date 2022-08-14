@@ -55,7 +55,7 @@ privateRouter.post('/create-post', upload.single('setupImage'), async (request, 
     await uploadToS3(file)
     await unlinkFile(file.path)
   } catch (error) {
-    response.status(400).json({success: false, message: 'failed to create the post.'})
+    response.status(400).json({success: false, message: 'failed to upload post photo.', reason: error.message})
   }
 
   const newPost = new Post({
@@ -72,12 +72,12 @@ privateRouter.post('/create-post', upload.single('setupImage'), async (request, 
 
   //upload post to MongoDB
   try {
-    const post = await newPost.save()
+    const post = await newPost.save({validateModifiedOnly: true})
     user.posts = user.posts.concat(post)
-    await user.save()
+    await user.save({validateModifiedOnly: true})
     response.status(201).json({success: true, message: 'post created!'})
   } catch (error) {
-    response.status(400).json({success: false, message: 'failed to create the post.'})
+    response.status(400).json({success: false, message: 'failed to create the post.', reason: error.message})
   }
 })
 

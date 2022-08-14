@@ -6,7 +6,7 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt'
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import { IconButton } from '@mui/material'
 
-const BACKEND_BASE_URL = "http://ec2-3-88-48-170.compute-1.amazonaws.com:8888"
+const BACKEND_BASE_URL = "http://localhost:3001"
 
 const ViewPosts = () => {
   const [posts, setPosts] = useState([])
@@ -14,7 +14,7 @@ const ViewPosts = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(`https://cors-everywhere-me.herokuapp.com/${BACKEND_BASE_URL}/api/private/posts`)
+      const result = await axios.get(`${BACKEND_BASE_URL}/api/private/posts`)
       setPosts(result.data)
     }
     fetchData()
@@ -23,7 +23,7 @@ const ViewPosts = () => {
   const sendUpdateRequest = async (ratedPost, updatedPost) => {
     try {
       const token = localStorage.getItem('authToken')
-      await axios.put(`https://cors-everywhere-me.herokuapp.com/${BACKEND_BASE_URL}/api/private/posts/` + ratedPost._id, updatedPost, {headers: {'authorization': token}})
+      await axios.put(`${BACKEND_BASE_URL}/api/private/posts/` + ratedPost._id, updatedPost, {headers: {'authorization': token}})
       const newPosts = posts.map(post => {
         if(post._id === ratedPost._id){
           return updatedPost
@@ -127,7 +127,7 @@ const ViewPosts = () => {
     const postId = post._id
     try{
       const token = localStorage.getItem('authToken')
-      await axios.delete(`https://cors-everywhere-me.herokuapp.com/${BACKEND_BASE_URL}/api/private/posts/` + postId, {headers: {'authorization': token}})
+      await axios.delete(`${BACKEND_BASE_URL}/api/private/posts/` + postId, {headers: {'authorization': token}})
       const newPosts = posts.filter(oldpost => oldpost._id !== postId)
       setPosts(newPosts)
     } catch (error) {
