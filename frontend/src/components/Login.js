@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
 
-const BACKEND_BASE_URL = "http://localhost:3001"
+const BACKEND_BASE_URL = "https://cors-everywhere-me.herokuapp.com/http://ec2-54-84-13-213.compute-1.amazonaws.com:3001"
 
 const Login = () => {
   const navigate = useNavigate()

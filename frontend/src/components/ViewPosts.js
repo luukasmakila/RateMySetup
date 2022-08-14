@@ -6,7 +6,7 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt'
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import { IconButton } from '@mui/material'
 
-const BACKEND_BASE_URL = "http://localhost:3001"
+const BACKEND_BASE_URL = "https://cors-everywhere-me.herokuapp.com/http://ec2-54-84-13-213.compute-1.amazonaws.com:3001"
 
 const ViewPosts = () => {
   const [posts, setPosts] = useState([])
