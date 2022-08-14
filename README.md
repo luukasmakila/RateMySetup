@@ -1,12 +1,10 @@
 # RateMySetup
 
-# DB upgrade and S3 migration done, hosting the backend soon.
-
 App link: https://master.d3u4uo1e3a4x97.amplifyapp.com
 
 ### What is it?
 
-Web based application where users are able to post their gaming / work setups.
+Web based application where users are able to post pictures and descriptions of their gaming / work setups. Users are also able to rate other users setups by liking / disliking posts.
 
 ### How to test?
 
@@ -16,13 +14,13 @@ Although passwords are securely hashed I understand you might not want to create
 <b>email: test@gmail.com</b> </br>
 <b>password: 12345</b>
 
-### How is the hosting handled?
+ps. please don't post anything illegal or what other's might find offensive
 
-At first I wanted to experiment with different type of service providers to see which one I like the most, but I'll be moving the db hosting and cloud storage to AWS DynamoDB and S3 buckets since AWS was the one I liked best. 
+### How is the hosting handled?
 
 Backend hosted on AWS ECS and frontend hosted on AWS Amplify
 
-For image storage im using Google cloud storage
+For image storage im using AWS S3 buckets
 
 For the database im using MongoDB atlas
 
@@ -30,6 +28,7 @@ For the database im using MongoDB atlas
 - Create an account and login
 - Upload an image of their gaming/work setup and create a post
 - Like / dislike other users posts
+- Creator of a post can delete their own posts
 
 <b>TODO</b>:
 - Bug fixes
