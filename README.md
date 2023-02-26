@@ -1,5 +1,7 @@
 # RateMySetup
 
+NOT HOSTED, AWS FREE TIER RAN OUT!
+
 >App link: https://master.d3u4uo1e3a4x97.amplifyapp.com
 
 ### What is it?
